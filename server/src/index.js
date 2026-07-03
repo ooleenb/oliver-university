@@ -68,3 +68,17 @@ app.use((err, req, res, next) => {
 app.listen(config.port, () => {
   console.log(`Oliver University API listening on http://localhost:${config.port}`)
 })
+
+// ---- 保活心跳：防止免费实例休眠 ----
+// Render 会自动注入 RENDER_EXTERNAL_URL（服务的公网地址）。每 10 分钟自己 ping 一次
+// /api/health，让实例始终有流量、不会因 15 分钟空闲而休眠。仅生产环境生效。
+const selfUrl = process.env.RENDER_EXTERNAL_URL
+if (selfUrl) {
+  const KEEP_ALIVE_MS = 10 * 60 * 1000 // 10 分钟 < Render 的 15 分钟空闲阈值
+  setInterval(() => {
+    fetch(`${selfUrl}/api/health`)
+      .then((r) => console.log(`[keep-alive] ping ${r.status}`))
+      .catch((e) => console.log(`[keep-alive] ping failed: ${e.message}`))
+  }, KEEP_ALIVE_MS)
+  console.log(`Keep-alive enabled → ${selfUrl}/api/health every 10 min`)
+}
