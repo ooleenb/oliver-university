@@ -59,7 +59,7 @@ export default function Login() {
             Apply for a place, track your offer, or manage your studies. A network of free thoughts — become your better self.
           </p>
         </div>
-        <p className="text-xs text-white/50">© 2026 {university.name} · Practice Project</p>
+        <p className="text-xs text-white/50">© 2026 {university.name} · Official</p>
       </div>
 
       {/* 右侧表单区 */}
