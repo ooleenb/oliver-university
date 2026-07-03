@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Meridian University — 设计 token
+   参考墨尔本(深色导航/大标题/统计块)与悉尼(衬线标题/暖色调)的规律，
+   但配色/字体均为原创，避免照搬品牌。
+   ============================================================ */
+@theme {
+  /* 品牌色 */
+  --color-ink: #0a1f44;        /* 深海军蓝：导航、页脚、深色区块 */
+  --color-ink-700: #16305f;
+  --color-ink-500: #2c4a80;
+  --color-primary: #b5122e;    /* 绯红：主按钮、强调、CTA */
+  --color-primary-dark: #8d0e23;
+  --color-gold: #c69121;       /* 暖金：点缀、图标 */
+  --color-sand: #f5efe3;       /* 砂岩米色：浅色区块背景 */
+  --color-paper: #ffffff;
+
+  /* 中性灰阶 */
+  --color-grey-50: #f7f8fa;
+  --color-grey-100: #eef1f5;
+  --color-grey-200: #dce1e9;
+  --color-grey-400: #9aa4b5;
+  --color-grey-600: #5b6473;
+  --color-grey-800: #2b3140;
+
+  /* 字体 */
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* 圆角与容器 */
+  --radius-card: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+/* 全站容器宽度 */
+.container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* 衬线大标题风格（借鉴悉尼 h2-serif） */
+.display-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ============================================================
+   高级感工具类（借鉴 Oxford 动画下划线 / UWA eyebrow / UCL 卡片）
+   ============================================================ */
+
+/* Eyebrow / overline —— 章节小标签，前置一段短金线 */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 1.9rem;
+  height: 2px;
+  background: var(--color-gold);
+}
+.eyebrow--center::after {
+  content: "";
+  display: block;
+  width: 1.9rem;
+  height: 2px;
+  background: var(--color-gold);
+}
+.eyebrow--on-dark {
+  color: var(--color-gold);
+}
+.eyebrow--on-dark::before,
+.eyebrow--on-dark.eyebrow--center::after {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 动画下划线（借鉴 Oxford 悬停下划线由左向右展开） */
+.link-underline {
+  position: relative;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+/* 卡片悬停微交互：轻微抬升 */
+.card-lift {
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -20px rgba(10, 31, 68, 0.35);
+}
+
+/* 章节节奏（流体上下留白） */
+.section-y {
+  padding-block: clamp(4rem, 8vw, 6.5rem);
+}
