@@ -5,13 +5,6 @@ import { university } from '../data/mock.js'
 import Icon from '../components/Icon.jsx'
 import Crest from '../components/Crest.jsx'
 
-const DEMO = [
-  { role: 'Applicant', email: 'applicant@oliver.edu', pwd: 'apply123' },
-  { role: 'Student', email: '100001@student.oliver.edu.au', pwd: 'student123' },
-  { role: 'Admissions', email: 'admission@oliver.edu.au', pwd: 'admit123' },
-  { role: 'Admin', email: 'admin@oliver.edu.au', pwd: 'admin123' },
-]
-
 export default function Login() {
   const { login } = useAuth()
   const navigate = useNavigate()
@@ -129,27 +122,6 @@ export default function Login() {
               Create an applicant account
             </Link>
           </p>
-
-          {/* 演示账号快捷登录 */}
-          <div className="mt-8 rounded-xl border border-grey-200 bg-white p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-grey-500 mb-2">Demo accounts — click to fill</p>
-            <div className="grid grid-cols-2 gap-2">
-              {DEMO.map((d) => (
-                <button
-                  key={d.email}
-                  type="button"
-                  onClick={() => {
-                    setEmail(d.email)
-                    setPwd(d.pwd)
-                  }}
-                  className="text-left rounded-lg border border-grey-200 px-3 py-2 hover:border-ink hover:bg-grey-50 transition-colors"
-                >
-                  <span className="block text-sm font-semibold text-ink">{d.role}</span>
-                  <span className="block text-[11px] text-grey-500 truncate">{d.email}</span>
-                </button>
-              ))}
-            </div>
-          </div>
 
           <p className="mt-6 text-sm text-grey-600">
             <Link to="/" className="text-primary font-semibold hover:underline">← Back to homepage</Link>
